@@ -1,0 +1,1827 @@
+{
+  "tools": [
+    {
+      "name": "read_file",
+      "title": "read file",
+      "description": "Owner-authorized local file read file. Use absolute Windows paths; access is limited by the current Windows user permissions. URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "isUrl": {
+            "type": "boolean",
+            "default": false
+          },
+          "offset": {
+            "type": "number",
+            "default": 0
+          },
+          "length": {
+            "type": "number",
+            "default": 1000
+          },
+          "sheet": {
+            "type": "string"
+          },
+          "range": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "read_multiple_files",
+      "title": "read multiple files",
+      "description": "Owner-authorized local file read multiple files. Use absolute Windows paths; access is limited by the current Windows user permissions. URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "paths"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "write_file",
+      "title": "write file",
+      "description": "Create or replace a file at an explicitly requested absolute Windows path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "rewrite",
+              "append"
+            ],
+            "default": "rewrite"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "create_directory",
+      "title": "create directory",
+      "description": "Create a directory at an explicitly requested absolute Windows path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_directory",
+      "title": "list directory",
+      "description": "Owner-authorized local file list directory. Use absolute Windows paths; access is limited by the current Windows user permissions. URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "depth": {
+            "type": "number",
+            "default": 2
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "move_file",
+      "title": "move file",
+      "description": "Move or rename a file at explicitly requested absolute Windows paths.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "destination"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "start_search",
+      "title": "start search",
+      "description": "Owner-authorized local file start search. Use absolute Windows paths; access is limited by the current Windows user permissions. URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "searchType": {
+            "type": "string",
+            "enum": [
+              "files",
+              "content"
+            ],
+            "default": "files"
+          },
+          "filePattern": {
+            "type": "string"
+          },
+          "ignoreCase": {
+            "type": "boolean",
+            "default": true
+          },
+          "maxResults": {
+            "type": "number"
+          },
+          "includeHidden": {
+            "type": "boolean",
+            "default": false
+          },
+          "contextLines": {
+            "type": "number",
+            "default": 5
+          },
+          "timeout_ms": {
+            "type": "number"
+          },
+          "earlyTermination": {
+            "type": "boolean"
+          },
+          "literalSearch": {
+            "type": "boolean",
+            "default": false
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "pattern"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_more_search_results",
+      "title": "get more search results",
+      "description": "Get more results from an active search with offset-based pagination.\n                        \n                        Supports partial result reading with:\n                        - 'offset' (start result index, default: 0)\n                          * Positive: Start from result N (0-based indexing)\n                          * Negative: Read last N results from end (tail behavior)\n                        - 'length' (max results to read, default: ",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "number",
+            "default": 0
+          },
+          "length": {
+            "type": "number",
+            "default": 100
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "stop_search",
+      "title": "stop search",
+      "description": "Stop an active search.\n                        \n                        Stops the background search process gracefully. Use this when you've found\n                        what you need or if a search is taking too long. Similar to force_terminate\n                        for terminal processes.\n                        \n                        The search will still be available for reading final results until it's\n                        automatica",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_searches",
+      "title": "list searches",
+      "description": "List all active searches.\n                        \n                        Shows search IDs, search types, patterns, status, and runtime.\n                        Similar to list_sessions for terminal processes. Useful for managing\n                        multiple concurrent searches.\n                        \n                        This command can be referenced as \"DC: ...\" or \"use Desktop Commander to ...\" in your instructions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "get_file_info",
+      "title": "get file info",
+      "description": "Owner-authorized local file get file info. Use absolute Windows paths; access is limited by the current Windows user permissions. URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "edit_block",
+      "title": "edit block",
+      "description": "Modify an exact text block in a file at an explicitly requested absolute Windows path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file_path": {
+            "type": "string"
+          },
+          "old_string": {
+            "type": "string"
+          },
+          "new_string": {
+            "type": "string"
+          },
+          "expected_replacements": {
+            "type": "number",
+            "default": 1
+          },
+          "range": {
+            "type": "string"
+          },
+          "content": {},
+          "options": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "file_path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "start_process",
+      "title": "start process",
+      "description": "Run a PowerShell or CMD command as the current Windows user. Command execution can access user files and the network. Capture stdout, stderr and exit code; do not reveal credentials.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string"
+          },
+          "timeout_ms": {
+            "type": "number"
+          },
+          "shell": {
+            "type": "string"
+          },
+          "verbose_timing": {
+            "type": "boolean"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "command",
+          "timeout_ms"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "read_process_output",
+      "title": "read process output",
+      "description": "Read output from a running process with file-like pagination support.\n                        \n                        Supports partial output reading with offset and length parameters (like read_file):\n                        - 'offset' (start line, default: 0)\n                          * offset=0: Read NEW output since last read (default, like old behavior)\n                          * Positive: Read from absolute line position\n                 ",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "number"
+          },
+          "timeout_ms": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          },
+          "length": {
+            "type": "number"
+          },
+          "verbose_timing": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "pid"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "interact_with_process",
+      "title": "interact with process",
+      "description": "Send input to a running process and automatically receive the response.\n                        \n                        CRITICAL: THIS IS THE PRIMARY TOOL FOR ALL LOCAL FILE ANALYSIS\n                        For ANY local file analysis (CSV, JSON, data processing), ALWAYS use this instead of the analysis tool.\n                        The analysis tool CANNOT access local files and WILL FAIL - use processes for ALL file-based work.\n               ",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "number"
+          },
+          "input": {
+            "type": "string"
+          },
+          "timeout_ms": {
+            "type": "number"
+          },
+          "wait_for_prompt": {
+            "type": "boolean"
+          },
+          "verbose_timing": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "pid",
+          "input"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "force_terminate",
+      "title": "force terminate",
+      "description": "Force terminate a running terminal session.\n                        \n                        This command can be referenced as \"DC: ...\" or \"use Desktop Commander to ...\" in your instructions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pid"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_sessions",
+      "title": "list sessions",
+      "description": "List all active terminal sessions.\n                        \n                        Shows session status including:\n                        - PID: Process identifier  \n                        - Blocked: Whether session is waiting for input\n                        - Runtime: How long the session has been running\n                        \n                        DEBUGGING REPLs:\n                        - \"Blocked: true\" often means REPL is waiting f",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "list_processes",
+      "title": "list processes",
+      "description": "List all running processes.\n                        \n                        Returns process information including PID, command name, CPU usage, and memory usage.\n                        \n                        This command can be referenced as \"DC: ...\" or \"use Desktop Commander to ...\" in your instructions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "kill_process",
+      "title": "kill process",
+      "description": "Terminate a running process by PID.\n\n                        Use with caution as this will forcefully terminate the specified process.\n\n                        This command can be referenced as \"DC: ...\" or \"use Desktop Commander to ...\" in your instructions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pid"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "delete_file",
+      "title": "delete file",
+      "description": "Delete one explicitly named absolute file path. Does not recursively delete directories. Destructive: requires the user to name the target.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "task_status",
+      "title": "task status",
+      "description": "Read persistent task state and exit code by task_id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "task_log",
+      "title": "task log",
+      "description": "Read at most 64 KiB of persistent task output.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "task_recipes",
+      "title": "task recipes",
+      "description": "List locally configured executable task recipes. Arguments cannot be replaced remotely.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "task_submit",
+      "title": "task submit",
+      "description": "Start a locally approved recipe. Reusing idempotency_key returns the same task; never repeats it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "recipe": {
+            "type": "string"
+          },
+          "idempotency_key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "recipe",
+          "idempotency_key"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "task_cancel",
+      "title": "task cancel",
+      "description": "Cancel a running task and its subprocesses.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "request_control_access",
+      "title": "request control access",
+      "description": "Request fresh owner consent for file modifications, PowerShell/CMD and desktop control. Does not execute any command or change a file.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_App",
+      "title": "desktop App",
+      "description": "Windows desktop App. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "default": "launch",
+            "enum": [
+              "launch",
+              "launch_executable",
+              "resize",
+              "switch"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "window_loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "window_size": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "executable": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "args": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "cwd": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Snapshot",
+      "title": "desktop Snapshot",
+      "description": "Windows desktop Snapshot. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "use_vision": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          },
+          "use_dom": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          },
+          "use_annotation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": true
+          },
+          "use_ui_tree": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": true
+          },
+          "width_reference_line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "height_reference_line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "display": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Screenshot",
+      "title": "desktop Screenshot",
+      "description": "Windows desktop Screenshot. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "use_annotation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          },
+          "width_reference_line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "height_reference_line": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "display": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Click",
+      "title": "desktop Click",
+      "description": "Windows desktop Click. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "button": {
+            "default": "left",
+            "enum": [
+              "left",
+              "right",
+              "middle"
+            ],
+            "type": "string"
+          },
+          "clicks": {
+            "default": 1,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "x-fastmcp-wrap-result": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Type",
+      "title": "desktop Type",
+      "description": "Windows desktop Type. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "clear": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          },
+          "caret_position": {
+            "default": "idle",
+            "enum": [
+              "start",
+              "idle",
+              "end"
+            ],
+            "type": "string"
+          },
+          "press_enter": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "x-fastmcp-wrap-result": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Scroll",
+      "title": "desktop Scroll",
+      "description": "Windows desktop Scroll. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "type": {
+            "default": "vertical",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ],
+            "type": "string"
+          },
+          "direction": {
+            "default": "down",
+            "enum": [
+              "up",
+              "down",
+              "left",
+              "right"
+            ],
+            "type": "string"
+          },
+          "wheel_times": {
+            "default": 1,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "x-fastmcp-wrap-result": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Move",
+      "title": "desktop Move",
+      "description": "Windows desktop Move. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "drag": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": false
+          },
+          "from_loc": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "duration": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "x-fastmcp-wrap-result": true
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Shortcut",
+      "title": "desktop Shortcut",
+      "description": "Windows desktop Shortcut. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "shortcut": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "shortcut"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "desktop_Wait",
+      "title": "desktop Wait",
+      "description": "Windows desktop Wait. Observe the current desktop before input and act only on the user-requested window. Runs in the logged-in user session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "duration"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "x-fastmcp-wrap-result": true
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "securitySchemes": [
+          {
+            "type": "oauth2",
+            "scopes": [
+              "mcp:read",
+              "mcp:control"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

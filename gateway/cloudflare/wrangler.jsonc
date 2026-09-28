@@ -1,0 +1,13 @@
+{
+  "name": "gpt-mcp-worker",
+  "account_id": "YOUR_CLOUDFLARE_ACCOUNT_ID",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-26",
+  "workers_dev": true,
+  "preview_urls": false,
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "kv_namespaces": [{"binding": "OAUTH_KV", "id": "YOUR_KV_NAMESPACE_ID"}],
+  "vars": {"IDENTITY_PROVIDER": "github", "MCP_ENABLED": "false", "CONTROL_AUTH_ENABLED": "false", "MCP_CONTROL_ENABLED": "false"},
+  "observability": {"enabled": false},
+  "vpc_services": [{"binding": "WINDOWS_MCP", "service_id": "YOUR_VPC_SERVICE_ID"}]
+}

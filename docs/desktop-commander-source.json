@@ -1,0 +1,30 @@
+﻿{
+  "version": "0.2.51",
+  "dist": {
+    "shasum": "fca73b7d88d0b8c9b9426b37af8584f74494e6f5",
+    "tarball": "https://registry.npmjs.org/@wonderwhy-er/desktop-commander/-/desktop-commander-0.2.51.tgz",
+    "fileCount": 249,
+    "integrity": "sha512-BF/ZV06c7mh+tzfJEkQpjcOg6UaQtzp2vRadIpA9hI+WpPDwkQ2ekdY0fbN7I4xOrCQX6NajyEPouEDXFJc1kA==",
+    "signatures": [
+      {
+        "sig": "MEQCIADf+Cg0EoGMV+hfLUtSaCcT3VhvOYYKK1o1NIfR94VHAiAgyuLs2ISy3d32q44DdzacJs2P+X1MoP4AvnZNEnM4eg==",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+        "sig": "MEUCIQDtElpeIDq1jG629XyZpXIeVX9wjVeAaVrfAxguc/SKCAIgfhEnZtVzzwdC4+R98ijV8nFVpL3wlGXwFfMfHBX+kGs="
+      }
+    ],
+    "attestations": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/@wonderwhy-er%2fdesktop-commander@0.2.51",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "unpackedSize": 3784512
+  },
+  "repository": {
+    "url": "git+https://github.com/wonderwhy-er/DesktopCommanderMCP.git",
+    "type": "git"
+  }
+}

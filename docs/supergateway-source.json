@@ -1,0 +1,30 @@
+﻿{
+  "version": "4.0.0",
+  "dist": {
+    "shasum": "2ec29ed58e150d2f0bf9a015be8e0784a8d3b80a",
+    "tarball": "https://registry.npmjs.org/supergateway/-/supergateway-4.0.0.tgz",
+    "fileCount": 26,
+    "integrity": "sha512-puVDDT5lB1tf0Pa3iw42e0yomEIInCweFmkb38zPjAsA1zh+sbq4PwzA5brrUkjVTOUuVMemsNdRnMEc0DBKAQ==",
+    "signatures": [
+      {
+        "sig": "MEUCIBpc6LyRVC1YJRK+fLiI354ftxva+4p2ZKKuoLxMsow9AiEAkb3hiPBlOVKurIa4JFk0db/Rtb/dhScyM79AdwLSGbQ=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+        "sig": "MEYCIQCEBnOr4VktEwJ3EIGUpJxansTaPJk8lH/rerZc4n7jXgIhAKlthT/m9RAmNZIMvZNXifYa2jDqH/A/Wx2b5Bsy89ad"
+      }
+    ],
+    "attestations": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/supergateway@4.0.0",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "unpackedSize": 141858
+  },
+  "repository": {
+    "url": "git+https://github.com/supercorp-ai/supergateway.git",
+    "type": "git"
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "tools": [
+    {
+      "name": "read_file",
+      "title": "read file",
+      "description": "Read a local file inside <PROJECT_ROOT>\\tests\\public. Use an absolute Windows path. Optional offset and length select part of the file. URL reads, file writes and paths outside this folder are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "isUrl": {
+            "type": "boolean",
+            "default": false
+          },
+          "offset": {
+            "type": "number",
+            "default": 0
+          },
+          "length": {
+            "type": "number",
+            "default": 1000
+          },
+          "sheet": {
+            "type": "string"
+          },
+          "range": {
+            "type": "string"
+          },
+          "options": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "read_multiple_files",
+      "title": "read multiple files",
+      "description": "Read multiple local files inside <PROJECT_ROOT>\\tests\\public using absolute Windows paths. Paths outside this folder and URL reads are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "paths"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "list_directory",
+      "title": "list directory",
+      "description": "List files and subdirectories inside <PROJECT_ROOT>\\tests\\public. Use an absolute Windows path; depth controls recursion. No files are changed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "depth": {
+            "type": "number",
+            "default": 2
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "start_search",
+      "title": "start search",
+      "description": "Start a file-name or content search inside <PROJECT_ROOT>\\tests\\public. Returns a temporary search session ID; use get_more_search_results to read results. Does not change files.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "searchType": {
+            "type": "string",
+            "enum": [
+              "files",
+              "content"
+            ],
+            "default": "files"
+          },
+          "filePattern": {
+            "type": "string"
+          },
+          "ignoreCase": {
+            "type": "boolean",
+            "default": true
+          },
+          "maxResults": {
+            "type": "number"
+          },
+          "includeHidden": {
+            "type": "boolean",
+            "default": false
+          },
+          "contextLines": {
+            "type": "number",
+            "default": 5
+          },
+          "timeout_ms": {
+            "type": "number"
+          },
+          "earlyTermination": {
+            "type": "boolean"
+          },
+          "literalSearch": {
+            "type": "boolean",
+            "default": false
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "ui",
+              "llm"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "pattern"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_more_search_results",
+      "title": "get more search results",
+      "description": "Read another page of results from a temporary search session started by start_search.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "number",
+            "default": 0
+          },
+          "length": {
+            "type": "number",
+            "default": 100
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "stop_search",
+      "title": "stop search",
+      "description": "Stop a temporary search session. Changes only that session; does not change files or start any external command.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sessionId"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "list_searches",
+      "title": "list searches",
+      "description": "List temporary search sessions for this MCP connection. Does not change files.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_file_info",
+      "title": "get file info",
+      "description": "Read metadata of a local file or directory inside <PROJECT_ROOT>\\tests\\public. Paths outside this folder are denied.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "task_status",
+      "title": "task status",
+      "description": "Read the status and exit code of an existing local task by task_id. Does not create, rerun or cancel tasks.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "task_log",
+      "title": "task log",
+      "description": "Read at most 64 KiB of output from an existing local task by task_id. Does not create, rerun or cancel tasks.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "task_recipes",
+      "title": "task recipes",
+      "description": "List names of configured local task recipes. Public clients cannot submit, change or execute recipes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

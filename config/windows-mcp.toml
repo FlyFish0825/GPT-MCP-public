@@ -1,0 +1,10 @@
+[server]
+transport = "streamable-http"
+host = "127.0.0.1"
+port = 8768
+
+[security]
+cors_origins = []
+
+[tools]
+include = ["Snapshot", "Screenshot"]

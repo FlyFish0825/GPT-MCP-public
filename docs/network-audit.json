@@ -1,0 +1,50 @@
+﻿[
+    {
+        "url":  "https://developers.openai.com/plugins/quickstart",
+        "mode":  "direct",
+        "result":  "403 1.195467",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://developers.openai.com/plugins/quickstart",
+        "mode":  "proxy",
+        "result":  "200 0.642862",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://chatgpt.com",
+        "mode":  "direct",
+        "result":  "000 12.009779",
+        "exitCode":  28
+    },
+    {
+        "url":  "https://chatgpt.com",
+        "mode":  "proxy",
+        "result":  "200 1.228738",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://api.cloudflare.com/client/v4",
+        "mode":  "direct",
+        "result":  "404 1.103855",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://api.cloudflare.com/client/v4",
+        "mode":  "proxy",
+        "result":  "404 0.485360",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://www.cloudflare.com",
+        "mode":  "direct",
+        "result":  "200 2.188630",
+        "exitCode":  0
+    },
+    {
+        "url":  "https://www.cloudflare.com",
+        "mode":  "proxy",
+        "result":  "200 0.923131",
+        "exitCode":  0
+    }
+]

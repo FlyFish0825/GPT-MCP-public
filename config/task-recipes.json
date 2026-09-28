@@ -1,0 +1,33 @@
+{
+  "long-test": {
+    "args": [
+      "long-test.mjs"
+    ],
+    "command": "node.exe",
+    "timeout_seconds": 60,
+    "cwd": "tests"
+  },
+  "cmake-build": {
+    "args": [
+      "--build",
+      "cmake-build"
+    ],
+    "command": "cmake.exe",
+    "timeout_seconds": 60,
+    "cwd": "tests"
+  },
+  "cmake-configure": {
+    "args": [
+      "-S",
+      "tests",
+      "-B",
+      "cmake-build",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=ninja.exe"
+    ],
+    "command": "cmake.exe",
+    "timeout_seconds": 60,
+    "cwd": "tests"
+  }
+}
